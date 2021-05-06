@@ -1,0 +1,14 @@
+command - npx create-react-app chatbot
+command - cd chatbot
+
+Comment - replace public and src folders with extracted folders
+
+command - npm i axios
+command - npm i react-cookie
+command- npm i react-linkify --save
+command - npm start
+
+
+
+
+Note : Install node first if not installed!!
