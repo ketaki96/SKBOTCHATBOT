@@ -1,0 +1,332 @@
+<html>
+<head>
+ <link rel="stylesheet"href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+      integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+      crossorigin="anonymous"/>
+<style>
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  font: 16px/1.2 "Roboto", sans-serif;
+  color: #333;
+}
+
+button {
+  padding: 6px 8px;
+  border: 0;
+  outline: 0;
+display:inline-block;
+}
+input[type="text"]{
+  padding: 6px 8px;
+  border: 0;
+  outline: 0;
+width:390px;
+display:inline-block;
+}
+button {
+  background-color: transparent;
+  cursor: pointer;
+
+}
+button:hover i {
+  color: #79c7c5;
+  transform: scale(1.2);
+}
+
+/* container */
+.container {
+  width: 450px;
+  height: auto;
+  position: absolute;
+  bottom:10px;
+ right:10px;
+  
+  z-index: 1;
+  border-radius: 10px;
+  background-color: #f9fbff;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  overflow: hidden;
+}
+
+/* chat_box */
+.chat_box {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.chat_box > * {
+  padding: 16px;
+}
+
+/* head */
+.head {
+  display: flex;
+  align-items: center;
+}
+.head .user {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+.head .user .avatar {
+  margin-right: 8px;
+}
+
+.head .bar_tool {
+  display: flex;
+}
+.head .bar_tool i {
+  padding: 5px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* body */
+.body {
+  flex-grow: 1;
+  background-color: #eee;
+}
+.bubble {
+  display: inline-block;
+  padding: 5px;
+  margin-bottom: 5px;
+  border-radius: 10px;
+max-width:350px;
+}
+.bubble p {
+  color: #f9fbff;
+  font-size: 14px;
+  text-align: left;
+  line-height: 0.8;
+  word-break: break-all;
+}
+
+.incoming {
+  text-align: left;
+left:10px;
+
+}
+.incoming .bubble {
+  background-color: #b2b2b2;
+}
+.outgoing {
+  text-align: right;
+
+}
+.outgoing .bubble {
+  background-color: #79c7c5;
+}
+
+#img {
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+#chat-title {
+  text-align: center;
+}
+#space {
+  height: 5px;
+}
+/* foot */
+.foot {
+  display: flex;
+
+}
+.foot .msg {
+  flex-grow: 1;
+}
+.msgsend
+{
+right: 10px;
+position:absolute;
+}
+#myForm
+{
+display:none;
+}
+.close
+{
+right:0;
+position:absolute;
+margin-top:-10px;
+}
+.callbot
+{
+border-radius:50%;
+width:50px;
+height:50px;
+bottom:130px;
+right:100px;
+position:fixed;
+display:flex;
+}
+#img1
+{
+width:100px;
+height:100px;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 30%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: #06D85F;
+}
+.popup .content {
+  max-height: 30%;
+  overflow: auto;
+}
+#infotext
+{
+ padding: 8px 8px;
+  border: 1px solid black;
+width:400px;
+margin-top:10px;
+  outline: 0;
+}
+#infobutton
+{
+ padding: 8px 8px;
+  border:0;
+color:white;
+width:400px;
+margin-top:10px;
+  outline: 0;
+background:dodgerblue;
+items-align:center;
+}
+@media screen and (max-width: 700px){
+  .box{
+    width: 70%;
+  }
+  .popup{
+    width: 70%;
+  }
+}
+</style>
+</head>
+<body>
+<script>
+function openForm() {
+   document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+</script>
+
+	<button class="callbot" onclick="openForm()">
+		<img id="img1"src="botlogo.jpg">
+	</button>
+
+	<div id="myForm"class="container">
+   		<div class="chat_box">
+    		<div class="head">
+    			<div class="user">
+    				<div class="name">Chats 
+						<button type="button" class="close" onclick="closeForm()">X</button>
+					</div>
+      			</div>
+      		</div>
+        	
+			<div class="body">
+				<img id="img" alt="Avater" src="bot.jpg" />
+ 				<div id="chat-title">SK</div>
+ 				<div id="space"></div>
+				<div class="incoming">
+      				<div class="bubble">
+        				<p>Hey, Father's Day is coming up..</p>
+      				</div>
+				<div class="bubble">
+        		<p>Do you want to share your information?<br>
+					<a href="#popup1"><button type="button">Yes</button></a>
+					<button type="button">No</button>
+				</p>
+      		</div>
+    	</div>
+		
+		<div class="outgoing">
+      		<div class="bubble">
+        		<p>Tell Everyone to bring their notebooksshhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhfgfygyeteiyugugfugjcbvbvnvbvnbnnnnnnnnnnnnnnnnnnnnnnnnnnnbbn</p>
+      		</div>
+    	</div>
+	</div>
+	
+	<div class="foot">
+      	<form action="">
+        	<input type="text" class="msg" placeholder="Type a message..." />
+        	<button class="msgsend"type="submit">
+          		<i class="fas fa-paper-plane"></i>
+        	</button>
+      	</form>
+    </div>
+</div>
+</div>
+
+<div id="popup1" class="overlay">
+	<div class="popup">
+		<h2>Information</h2>
+		<a class="close" href="#">&times;</a>
+		<div class="content">
+			<input type="text"id="infotext"placeholder="Enter Name" required>
+            <input type="email"id="infotext"placeholder="Enter Email"required>
+      		<input type="submit"id="infobutton"name="enter"value="Submit">
+		</div>
+	</div>
+</div>
+
+</body>
+</html>
